@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edward Demura | Network & Security Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --secondary: #06b6d4;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --gray: #64748b;
+            --light: #f1f5f9;
+            --white: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 60px;
+            background: var(--white);
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            transform: skewY(-3deg);
+            transform-origin: top left;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--dark-light);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(14, 165, 233, 0.4);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .network-animation {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(6, 182, 212, 0.1));
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .network-animation::before {
+            content: '🌐';
+            font-size: 150px;
+            opacity: 0.3;
+            animation: rotate 20s linear infinite;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .skill-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .skill-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Achievements Section */
+        .achievements {
+            padding: 80px 0;
+            background: white;
+            position: relative;
+        }
+
+        .achievements::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, white, rgba(249, 250, 251, 0.9));
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(14, 165, 233, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .achievement-card:hover::before {
+            opacity: 1;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .achievement-card:nth-child(2) .achievement-icon { animation-delay: 0.5s; }
+        .achievement-card:nth-child(3) .achievement-icon { animation-delay: 1s; }
+        .achievement-card:nth-child(4) .achievement-icon { animation-delay: 1.5s; }
+        .achievement-card:nth-child(5) .achievement-icon { animation-delay: 2s; }
+        .achievement-card:nth-child(6) .achievement-icon { animation-delay: 2.5s; }
+
+        .achievement-card h3 {
+            color: var(--dark);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-metric {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInLeft 0.8s ease forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -44px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 0 4px white, 0 0 0 6px var(--primary);
+        }
+
+        .timeline-content {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+        }
+
+        .timeline-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--dark-light);
+            line-height: 1.8;
+        }
+
+        .timeline-description li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline-description li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-type {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .project-status {
+            color: var(--success);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .project-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            background: var(--dark);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .project-card p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .project-card p strong {
+            color: var(--dark);
+        }
+
+        .project-result {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 0.8rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--success);
+            margin-top: 1rem;
+        }
+
+        /* Certifications */
+        .certifications {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-badge {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-badge::before {
+            content: '🏆';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 60px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .cert-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+        }
+
+        .cert-badge h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-badge p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Certifications */
+        .certifications {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-badge {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-badge::before {
+            content: '🏆';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 60px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .cert-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+        }
+
+        .cert-badge h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-badge p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Resume Section */
+        .resume-section {
+            padding: 80px 0;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resume-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+            transform: skewY(-2deg);
+        }
+
+        .resume-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .resume-text h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .resume-text p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .resume-preview {
+            perspective: 1000px;
+        }
+
+        .resume-paper {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transform: rotateY(-5deg) rotateX(5deg);
+            transition: all 0.3s ease;
+            position: relative;
+            max-height: 400px;
+            overflow: hidden;
+        }
+
+        .resume-paper:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        .resume-header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .resume-header h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .resume-header p {
+            color: var(--gray);
+        }
+
+        .resume-section-preview {
+            margin-bottom: 1.5rem;
+        }
+
+        .resume-section-preview h4 {
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .resume-section-preview p,
+        .resume-section-preview li {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .resume-section-preview ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .resume-section-preview li::before {
+            content: '▸';
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        .resume-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, white);
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--dark), var(--dark-light));
+            color: white;
+            text-align: center;
+        }
+
+        .contact .section-title {
+            color: white;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-stats {
+                justify-content: space-around;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .resume-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .resume-paper {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">ED</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certs</a></li>
+                <li><a href="#achievements">Impact</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Edward Demura</h1>
+                    <p class="subtitle">Network & Security Engineer</p>
+                    <p>CCNP SD-WAN and PCNSE certified engineer with 7+ years writing, designing, deploying, and supporting enterprise networks. Proficient in Cisco Routing & Switching, SD-WAN, ISE, Meraki, Palo Alto and Checkpoint firewalls, Azure, and GCP.</p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">7+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Certifications</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Sites Deployed</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <span>Get In Touch</span>
+                            <span>→</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/eduarddemura/" target="_blank" class="btn btn-secondary">
+                            <span>LinkedIn Profile</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    <div class="network-animation"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>🔐 Security</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Palo Alto Firewalls</span>
+                        <span class="tag">Checkpoint Firewalls</span>
+                        <span class="tag">Cisco ASA</span>
+                        <span class="tag">Cisco ISE</span>
+                        <span class="tag">Panorama</span>
+                        <span class="tag">IPSec VPN</span>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <h3>🌐 Networking</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Cisco Routing & Switching</span>
+                        <span class="tag">Cisco SD-WAN</span>
+                        <span class="tag">Meraki</span>
+                        <span class="tag">BGP/OSPF/EIGRP</span>
+                        <span class="tag">MPLS</span>
+                        <span class="tag">VLANs</span>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <h3>☁️ Cloud</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Azure</span>
+                        <span class="tag">Google Cloud</span>
+                        <span class="tag">CloudGenix</span>
+                        <span class="tag">Citrix SD-WAN</span>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <h3>🖥️ Systems</h3>
+                    <div class="skill-tags">
+                        <span class="tag">VMware vCenter</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">Windows Server</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <h3>📊 Monitoring & Analytics</h3>
+                    <div class="skill-tags">
+                        <span class="tag">WhatsUp Gold</span>
+                        <span class="tag">ScienceLogic SL1</span>
+                        <span class="tag">Splunk</span>
+                        <span class="tag">Wireshark</span>
+                        <span class="tag">OpsView</span>
+                        <span class="tag">SNMP</span>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <h3>📡 Wireless</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Cisco WLC 9800</span>
+                        <span class="tag">Cisco Wireless</span>
+                        <span class="tag">Aruba</span>
+                        <span class="tag">Meraki Wireless</span>
+                        <span class="tag">802.11ax/Wi-Fi 6</span>
+                        <span class="tag">Site Surveys</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">10/2024 – 03/2025</div>
+                        <h3 class="timeline-title">IT Consultant</h3>
+                        <p class="timeline-company">EXPERIS / MIRA COSTA COLLEGE | Oceanside, CA</p>
+                        <ul class="timeline-description">
+                            <li>Upgraded 50+ Cisco 2960/3650 switches to Catalyst 9300 series (IOS-XE)</li>
+                            <li>Deployed Cisco WLC 9800 supporting 200+ Wi-Fi 6 access points</li>
+                            <li>Maintained 99.9% uptime for critical VoIP and data services</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">07/2023 – 08/2024</div>
+                        <h3 class="timeline-title">Network Consultant</h3>
+                        <p class="timeline-company">DISYS / CARRIER | San Diego, CA</p>
+                        <ul class="timeline-description">
+                            <li>Redesigned small office layouts including rack design and AP placement</li>
+                            <li>Led migration of 100+ satellite sites and 2 data centers to Cisco SD-WAN</li>
+                            <li>Configured Viptela vEdge routers with dual-carrier failover (MPLS/Internet)</li>
+                            <li>Deployed Meraki MR46 access points with location analytics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">07/2022 – 07/2023</div>
+                        <h3 class="timeline-title">Network/Security Engineer</h3>
+                        <p class="timeline-company">EUROFINS, NSC | San Diego, CA</p>
+                        <ul class="timeline-description">
+                            <li>Built greenfield sites with Cisco 9300, virtual SD-WAN, Checkpoint R81, VMware, OpenGear</li>
+                            <li>Designed Zero-Trust network architecture for HIPAA-compliant laboratories</li>
+                            <li>Executed legacy network cutovers and equipment decommissioning per strict approval procedures</li>
+                            <li>Deployed Checkpoint R81 virtual firewalls with 10Gbps throughput</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">12/2018 – 07/2022</div>
+                        <h3 class="timeline-title">Network Consultant → Team Lead</h3>
+                        <p class="timeline-company">BURWOOD GROUP INC. | San Diego, CA</p>
+                        <ul class="timeline-description">
+                            <li>Migrated over 1000 sites to Palo Alto CloudGenix SD-WAN</li>
+                            <li>Managed version control and upgrades for 300+ Palo Alto firewalls</li>
+                            <li>Led team of 8 engineers, improved ticket resolution by 40%</li>
+                            <li>Developed Python scripts for rapid SD-WAN deployment automation</li>
+                            <li>Achieved 99.99% uptime SLA across managed customer networks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- Projects & Case Studies -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Notable Projects & Solutions</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-type">Large-Scale Migration</span>
+                        <span class="project-status">✅ Completed</span>
+                    </div>
+                    <h3>Enterprise SD-WAN Deployment</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">CloudGenix</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Viptela</span>
+                    </div>
+                    <p><strong>Challenge:</strong> Migrate 1000+ retail sites from MPLS to SD-WAN with minimal disruption.</p>
+                    <p><strong>Solution:</strong> Developed Python automation scripts for rapid deployment, created standardized templates, implemented phased rollout strategy.</p>
+                    <p class="project-result"><strong>Result:</strong> Successfully migrated all sites in 18 months, reduced deployment time per site from 8 hours to 3 hours.</p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-type">Infrastructure Design</span>
+                        <span class="project-status">✅ Completed</span>
+                    </div>
+                    <h3>Laboratory Network Build</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Cisco 9300</span>
+                        <span class="tech-tag">Checkpoint R81</span>
+                        <span class="tech-tag">VMware</span>
+                    </div>
+                    <p><strong>Challenge:</strong> Build complete network infrastructure for newly acquired laboratory facilities with strict compliance requirements.</p>
+                    <p><strong>Solution:</strong> Deployed Cisco 9300 switches, virtual Checkpoint firewalls, virtual SD-WAN edges, OpenGear OOB management, following strict change control.</p>
+                    <p class="project-result"><strong>Result:</strong> Delivered HIPAA-compliant network on schedule, passed all security audits on first attempt.</p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-type">Security Management</span>
+                        <span class="project-status">✅ Completed</span>
+                    </div>
+                    <h3>Firewall Fleet Management</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Palo Alto</span>
+                        <span class="tech-tag">Panorama</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                    <p><strong>Challenge:</strong> Manage version control and upgrades for 300+ Palo Alto firewalls across multiple customers.</p>
+                    <p><strong>Solution:</strong> Implemented centralized Panorama management, created upgrade automation scripts, established maintenance windows.</p>
+                    <p class="project-result"><strong>Result:</strong> Reduced upgrade time by 70%, maintained consistent security posture, zero security incidents during upgrades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" class="certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="cert-grid">
+                <div class="cert-badge">
+                    <h4>CCNP SD-WAN</h4>
+                    <p>Cisco • 2021</p>
+                </div>
+                <div class="cert-badge">
+                    <h4>CCNP R&S</h4>
+                    <p>Cisco • 2020</p>
+                </div>
+                <div class="cert-badge">
+                    <h4>PCNSE</h4>
+                    <p>Palo Alto • 2022</p>
+                </div>
+                <div class="cert-badge">
+                    <h4>Google Cloud</h4>
+                    <p>Associate • 2020</p>
+                </div>
+                <div class="cert-badge">
+                    <h4>Azure</h4>
+                    <p>Fundamentals • 2022</p>
+                </div>
+                <div class="cert-badge">
+                    <h4>CCNA Security</h4>
+                    <p>Cisco • 2018</p>
+                </div>
+                <div class="cert-badge">
+                    <h4>Citrix SD-WAN</h4>
+                    <p>Fundamentals • 2022</p>
+                </div>
+                <div class="cert-badge">
+                    <h4>Guardicore</h4>
+                    <p>GCSA & GCSE</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Achievements Section -->
+    <section id="achievements" class="achievements">
+        <div class="container">
+            <h2 class="section-title">Key Achievements & Impact</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon">🚀</div>
+                    <h3>Network Performance</h3>
+                    <div class="achievement-metric">99.95%</div>
+                    <p>Average network uptime maintained across multi-site deployments</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🌐</div>
+                    <h3>SD-WAN Migration</h3>
+                    <div class="achievement-metric">1000+</div>
+                    <p>Sites successfully migrated to CloudGenix SD-WAN platform</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">⚡</div>
+                    <h3>Migration Success</h3>
+                    <div class="achievement-metric">Zero Downtime</div>
+                    <p>Completed 100+ site migrations and 2 DC cutovers without service interruption</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🔧</div>
+                    <h3>Infrastructure Scale</h3>
+                    <div class="achievement-metric">300+</div>
+                    <p>Firewalls managed with version control and upgrade automation</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">📊</div>
+                    <h3>Automation Impact</h3>
+                    <div class="achievement-metric">60%</div>
+                    <p>Reduction in deployment time through Python automation scripts</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">🛡️</div>
+                    <h3>Security Posture</h3>
+                    <div class="achievement-metric">100%</div>
+                    <p>Security audit compliance achieved for healthcare laboratories</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Download Section -->
+    <section id="resume" class="resume-section">
+        <div class="container">
+            <div class="resume-content">
+                <div class="resume-text">
+                    <h2>Download Full Resume</h2>
+                    <p>Get the complete PDF version with detailed project descriptions and technical accomplishments</p>
+                    <button class="btn btn-download" onclick="downloadResume()">
+                        <span>📄</span>
+                        <span>Download Resume PDF</span>
+                    </button>
+                </div>
+                <div class="resume-preview">
+                    <div class="resume-paper">
+                        <div class="resume-header">
+                            <h3>Edward Demura</h3>
+                            <p>Network & Security Engineer</p>
+                        </div>
+                        <div class="resume-section-preview">
+                            <h4>Professional Summary</h4>
+                            <p>Network and Security Engineer with 7+ years writing, designing, deploying, and supporting enterprise networks. CCNP SD-WAN and PCNSE certified...</p>
+                        </div>
+                        <div class="resume-section-preview">
+                            <h4>Key Skills</h4>
+                            <ul>
+                                <li>Cisco Routing & Switching, SD-WAN, ISE</li>
+                                <li>Palo Alto & Checkpoint Firewalls</li>
+                                <li>Azure, GCP, VMware, Linux</li>
+                            </ul>
+                        </div>
+                        <div class="resume-fade"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <p style="margin-bottom: 2rem; opacity: 0.9;">Ready to discuss your network infrastructure needs?</p>
+            <div class="contact-info">
+                <a href="tel:917-635-9260" class="contact-item">
+                    <span>📱</span>
+                    <span>917-635-9260</span>
+                </a>
+                <a href="mailto:edward@edemura.com" class="contact-item">
+                    <span>✉️</span>
+                    <span>edward@edemura.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/eduarddemura/" target="_blank" class="contact-item">
+                    <span>💼</span>
+                    <span>LinkedIn</span>
+                </a>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>Washington, USA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.15)';
+            } else {
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe skill cards and cert badges
+        document.querySelectorAll('.skill-card, .cert-badge').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Download Resume Function
+        function downloadResume() {
+            // Create resume content
+            const resumeContent = `EDWARD DEMURA
+Phone: 917-635-9260 | Email: edward@edemura.com | Address: WA
+LinkedIn: https://www.linkedin.com/in/eduarddemura/
+
+PROFESSIONAL SUMMARY
+Network and Security Engineer with 7+ years writing, designing, deploying, and supporting enterprise networks. CCNP SD-WAN and PCNSE certified. Skilled in Cisco Routing & Switching, SD-WAN, ISE, Meraki, Palo Alto and Checkpoint firewalls, Azure, GCP, LAN, WAN, WLAN, virtualization, and Linux. Experience in multisite rollouts, network optimization, cloud integration, troubleshooting, and documentation. Calm under pressure, client-facing, problem-solving mindset.
+
+KEY SKILLS:
+• SNMP, TCP/IP, VLANs, MPLS, HSRP, VRRP, EIGRP, OSPF, BGP, IPSec, VPN, SSH
+• UCS, VMware vCenter, Citrix XenCenter, Hyper-V, Windows Server, Linux
+• ScienceLogic SL1/EM7, OpsView, Splunk, Wireshark, WhatsUPGold
+• Citrix SD-WAN, CloudGenix, Cisco Meraki, Cisco Viptela
+• Cisco ASA, Palo Alto Firewalls, Checkpoint Firewalls, Panorama, Cisco ISE
+• Azure, Google Cloud Platform, Python scripting
+• Cisco, Aruba, Meraki, Buffalo wireless
+
+CAREER HISTORY:
+
+EXPERIS / MIRA COSTA COLLEGE, Oceanside, CA                           10/2024 – 03/2025
+IT CONSULTANT (Contract)
+• Upgraded Cisco 2960/3650 to 9300 switches
+• Supported daily network and VoIP operations to ensure uptime and performance
+• Deployed Cisco WLC 9800 and 9000 series access points, mapped wireless networks
+
+DISYS / CARRIER, San Diego, CA                                        07/2023 – 08/2024
+NETWORK CONSULTANT (Contract)
+• Designed and deployed WAN, LAN, and wireless infrastructure for small office sites
+• Configured Cisco SD-WAN, Meraki wireless, and Cisco wireless solutions
+• Diagnosed and resolved SD-WAN and wireless performance issues
+• Collaborated with Japanese clients to implement tailored network solutions
+
+EUROFINS, NSC, San Diego, CA                                          07/2022 – 07/2023
+NETWORK/SECURITY ENGINEER
+• Designed and implemented network infrastructure for newly acquired laboratories
+• Created process documentation to improve operations and efficiency
+• Deployed and managed vCenter, Checkpoint firewalls, Cisco switches, and Cisco SD-WAN
+• Maintained and optimized Cisco Wireless LAN Controllers for secure, high-performance wireless
+
+BURWOOD GROUP INC., San Diego, CA                                     12/2018 – 07/2022
+NETWORK CONSULTANT | 03/2022 – 07/2022
+• Delivered high-quality network and security solutions using Cisco and Aruba
+• Replaced Palo Alto PA-3020 firewalls with PA-5000 series, improving security and performance
+• Supported Cisco 9300 switches in university campus environment post-deployment
+• Provided client training and knowledge transfer for solution maintenance
+
+TIER 2 NETWORK/SECURITY ENGINEER | 03/2021 – 03/2022
+• Deployed and supported Cisco Meraki, Citrix SD-WAN, Palo Alto CloudGenix across multiple sites
+• Completed Citrix SD-WAN and Palo Alto CloudGenix deployments
+• Trained engineers on CloudGenix support and deployment
+• Maintained Python automation scripts and detailed documentation
+• Managed Cisco ASA policies, upgrades, and VPN migrations
+
+OPERATIONS TEAM LEAD | 03/2020 – 03/2021
+• Improved escalation workflows and ticket management, reducing SLA breaches
+• Introduced processes for sensitive incident and alert management
+
+NOC ENGINEER | 12/2018 – 03/2020
+• Managed network engineering and IT projects including hardware, software, and VoIP deployments
+• Monitored network performance, handled troubleshooting and upgrades for firewalls, UC, SD-WAN, Windows Server
+• Provided Layer 2/3 enterprise environment support and trained new engineers
+
+BASTYR UNIVERSITY, San Diego, CA                                      04/2017 – 12/2018
+NETWORK ENGINEER
+• Supported daily operations of networks, servers, and user access for 300+ users
+• Managed system upgrades and enhancements for Windows Server, Cisco and Dell switches, SonicWall firewalls
+
+EDUCATION
+Moscow Technical University of Communication and Informatics
+• MS Information and Communication Technologies and Communication Systems
+• BA Information and Communication Technologies and Communication Systems
+
+CERTIFICATIONS
+• Cisco - CCNP SD-WAN 2021, CCNP Route & Switch 2020, CCNA Security 2018
+• Palo Alto - PCNSE 2022, PSE 2021
+• Cloud - Google Associate Cloud Engineer 2020, Azure Fundamentals 2022
+• Other - Citrix SD-WAN Fundamentals 2022, Guardicore GCSA & GCSE
+
+ADDITIONAL INFORMATION
+• US citizen
+• US driver's license`;
+
+            // Create a blob with the content
+            const blob = new Blob([resumeContent], { type: 'text/plain' });
+            
+            // Create a temporary URL for the blob
+            const url = window.URL.createObjectURL(blob);
+            
+            // Create a temporary anchor element and trigger download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Edward_Demura_Resume.txt';
+            document.body.appendChild(a);
+            a.click();
+            
+            // Clean up
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            // Show a subtle confirmation
+            const btn = event.target.closest('.btn-download');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>✓</span><span>Downloaded!</span>';
+            btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
